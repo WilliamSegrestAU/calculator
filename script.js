@@ -1,5 +1,6 @@
 let opValue = '';
 let firstValue = '';
+let secondValue = '';
 let step = 0;
 
 const operators = ['+', '-', '*', '/', '='];
@@ -80,7 +81,7 @@ buttons.forEach((button) => {
         else {
             display.value = e.target.value
         }
-        
+
         calulate(e.target.value);
     });
 });
