@@ -2,8 +2,9 @@ let opValue = '';
 let firstValue = '';
 let secondValue = '';
 let step = 0;
+let buffer = 0;
 
-const operators = ['+', '-', '*', '/', '='];
+const operators = ['+', '-', '*', '/', '=', 'AC'];
 
 // When called, it performs equation based on operator
 function operate(operator, a, b) {
@@ -23,19 +24,41 @@ function operate(operator, a, b) {
     }
 }
 
+// Clears display screen and variables associated with it
+function clear() {
+    display.value = '';
+    firstValue = '';
+    opValue = '';
+    secondValue = '';
+    step = 0;
+    buffer = 0;
+}
+
 // Calculates target value based on conditions to display on screen
 function calulate(val) {
     // Check for operator
     // Operator stored
     if (operators.includes(val)) {
-        if (val == '=') {
+        buffer = 0;
+        // Checks for clear button
+        if (val == 'AC') {
+            clear();
+        }
+        // Checks for equal button
+        // Buffer equals one to check if user clicks a button besides an operator
+        // after operate function
+        else if (val == '=') {
             display.value = operate(opValue, firstValue, secondValue);
+            buffer = 1;
             firstValue = display.value;
             secondValue = '';
         }
         else if (opValue != '' && secondValue != '') {
             // Must be evaluated, first value is stored as operate
+            // Buffer equals one to check if user clicks a button besides an operator
+            // after operate function
             display.value = operate(opValue, firstValue, secondValue);
+            buffer = 1;
             firstValue = display.value;
             secondValue = '';
             opValue = val;
@@ -45,15 +68,21 @@ function calulate(val) {
         }
     }
     else {
-        // First value added until operator
-        if (opValue == '') {
+        // Checks if user presses a button besides an operator after 
+        // the operate() function.
+        if (buffer == 1) {
+            clear();
+            display.value = val;
             firstValue = display.value;
-            console.log(firstValue);
+            buffer = 0;
+        }
+        // First value added until operator
+        else if (opValue == '') {
+            firstValue = display.value;
         }
         // If first value and operator stored, second value added
         else {
             secondValue = display.value;
-            console.log(secondValue);
         }
     }
 }
