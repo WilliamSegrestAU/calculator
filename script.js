@@ -5,6 +5,7 @@ let step = 0;
 
 const operators = ['+', '-', '*', '/', '='];
 
+// When called, it performs equation based on operator
 function operate(operator, a, b) {
     a = Number(a);
     b = Number(b);
@@ -22,6 +23,7 @@ function operate(operator, a, b) {
     }
 }
 
+// Calculates target value based on conditions to display on screen
 function calulate(val) {
     // Check for operator
     // Operator stored
