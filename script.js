@@ -58,7 +58,6 @@ function calulate(val) {
             // Buffer equals one to check if user clicks a button besides an operator
             // after operate function
             display.value = operate(opValue, firstValue, secondValue);
-            buffer = 1;
             firstValue = display.value;
             secondValue = '';
             opValue = val;
