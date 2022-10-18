@@ -13,22 +13,25 @@ function operate(operator, a, b) {
     switch (operator) {
         case '+':
             if (!((a+b) % 1 == 0)) {
-                return (a+b).toFixed(2)
+                return (a+b).toFixed(2);
             }
             return a + b;
         case '-':
             if (!((a-b) % 1 == 0)) {
-                return (a-b).toFixed(2)
+                return (a-b).toFixed(2);
             }
             return a - b;
         case '*':
             if (!((a*b) % 1 == 0)) {
-                return (a*b).toFixed(2)
+                return (a*b).toFixed(2);
             }
             return a * b;
         case '/':
+            if (b == 0) {
+                return "Can't divide by 0!";
+            }
             if (!((a/b) % 1 == 0)) {
-                return (a/b).toFixed(2)
+                return (a/b).toFixed(2);
             }
             return a / b;
         default:
@@ -52,6 +55,7 @@ function calulate(val) {
     // Operator stored
     if (operators.includes(val)) {
         buffer = 0;
+        deciButton.disabled = false;
         // Checks for clear button
         if (val == 'AC') {
             clear();
@@ -98,10 +102,16 @@ function calulate(val) {
         // First value added until operator
         else if (opValue == '') {
             firstValue = display.value;
+            if (firstValue.includes('.')) {
+                deciButton.disabled = true;
+            }
         }
         // If first value and operator stored, second value added
         else {
             secondValue = display.value;
+            if (secondValue.includes('.')) {
+                deciButton.disabled = true;
+            }
         }
     }
 }
@@ -111,6 +121,7 @@ const calcContainer = document.getElementById('calculator');
 
 const display = document.getElementById('display-area');
 const buttons = document.querySelectorAll('button');
+const deciButton = document.getElementById('btn_.')
 
 // Event listener checks for every button
 buttons.forEach((button) => {
