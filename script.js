@@ -12,12 +12,24 @@ function operate(operator, a, b) {
     b = Number(b);
     switch (operator) {
         case '+':
+            if (!((a+b) % 1 == 0)) {
+                return (a+b).toFixed(2)
+            }
             return a + b;
         case '-':
+            if (!((a-b) % 1 == 0)) {
+                return (a-b).toFixed(2)
+            }
             return a - b;
         case '*':
+            if (!((a*b) % 1 == 0)) {
+                return (a*b).toFixed(2)
+            }
             return a * b;
         case '/':
+            if (!((a/b) % 1 == 0)) {
+                return (a/b).toFixed(2)
+            }
             return a / b;
         default:
             break;
