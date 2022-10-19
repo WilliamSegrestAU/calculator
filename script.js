@@ -7,6 +7,7 @@ let buffer = 0;
 const operators = ['+', '-', '*', '/', '=', 'AC'];
 
 // When called, it performs equation based on operator
+// Rounds decimals to the hundreths place
 function operate(operator, a, b) {
     a = Number(a);
     b = Number(b);
@@ -121,7 +122,8 @@ const calcContainer = document.getElementById('calculator');
 
 const display = document.getElementById('display-area');
 const buttons = document.querySelectorAll('button');
-const deciButton = document.getElementById('btn_.')
+const deciButton = document.getElementById('btn_.');
+const undoButton = document.getElementById('btn_←');
 
 // Event listener checks for every button
 buttons.forEach((button) => {
@@ -136,6 +138,30 @@ buttons.forEach((button) => {
             display.value = e.target.value
             step = 0;        
         }
+        // Checks if event target is the undo button
+        else if (e.target.value == '←') {
+            if (firstValue == '') {
+                clear();
+            }
+            else if (firstValue != '' && opValue == '') {
+                firstValue = firstValue.slice(0, -1);
+                display.value = firstValue;
+            }
+            else {
+                // If the second value is '', second value turns to 0
+                if (secondValue.slice(0, -1) == '') {
+                    secondValue = 0;
+                }
+                else {
+                    secondValue = secondValue.slice(0, -1);
+                }
+                display.value = secondValue;
+            }
+        }
+        // If 0 is only on display, event target value replaces 0
+        else if (display.value == 0) {
+            display.value = e.target.value;
+        }
         else if (display.value != '') {
             display.value += e.target.value
         }
@@ -143,6 +169,7 @@ buttons.forEach((button) => {
             display.value = e.target.value
         }
 
+        // Calculate function called
         calulate(e.target.value);
     });
 });
