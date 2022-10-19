@@ -56,7 +56,7 @@ function calulate(val) {
     // Operator stored
     if (operators.includes(val)) {
         buffer = 0;
-        deciButton.disabled = false;
+        undoButton.disabled = true;
         // Checks for clear button
         if (val == 'AC') {
             clear();
@@ -128,6 +128,8 @@ const undoButton = document.getElementById('btn_←');
 // Event listener checks for every button
 buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
+        deciButton.disabled = false;
+        undoButton.disabled = false;
         // If operator, display value is just operator
         if (operators.includes(e.target.value)) {
             display.value = e.target.value;
