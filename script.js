@@ -130,8 +130,10 @@ buttons.forEach((button) => {
     button.addEventListener('click', (e) => {
         deciButton.disabled = false;
         undoButton.disabled = false;
-        // If operator, display value is just operator
+
+        // Check for operator
         if (operators.includes(e.target.value)) {
+            // If operator, display value is just operator
             display.value = e.target.value;
             step = 1;
         }
@@ -161,8 +163,14 @@ buttons.forEach((button) => {
             }
         }
         // If 0 is only on display, event target value replaces 0
-        else if (display.value == 0) {
-            display.value = e.target.value;
+        // Checks for string instead of type number ('0.' would equal 0)
+        else if (display.value == '0') {
+            if (e.target.value == '.') {
+                display.value += e.target.value;
+            }
+            else {
+                display.value = e.target.value;
+            }
         }
         else if (display.value != '') {
             display.value += e.target.value
