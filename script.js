@@ -121,6 +121,8 @@ function calulate(val) {
 const calcContainer = document.getElementById('calculator');
 
 const display = document.getElementById('display-area');
+display.readOnly = true;
+
 const buttons = document.querySelectorAll('button');
 const deciButton = document.getElementById('btn_.');
 const undoButton = document.getElementById('btn_←');
